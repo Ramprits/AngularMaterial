@@ -1,0 +1,29 @@
+<div class="container">
+  <button mat-raised-button color="primary" *ngIf="!isEdit" (click)="AddPost()">Add</button>
+  <div *ngIf="isEdit;else editList">
+    <app-edit-post (addPost)="onSavePost($event)"></app-edit-post>
+  </div>
+
+  <ng-template #editList>
+    <mat-card *ngFor="let post of posts" style="margin-top: 1rem;">
+      <h1>
+        <mat-card-title> {{post.name}}</mat-card-title>
+      </h1>
+      <mat-card-content>
+        <span>
+          {{post.email}}
+          <br>
+          <p>
+            {{post.body}}
+          </p>
+          <br> {{post.createdDate | date}}
+        </span>
+        <br>
+        <br>
+        <button mat-raised-button color="warn" (click)="onDelete(post)">Delete</button>
+
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
+
+</div>

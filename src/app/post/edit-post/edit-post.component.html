@@ -1,0 +1,21 @@
+<div class="example-container">
+
+  <form [formGroup]="postForm" class="example-form" autocomplete="off" (ngSubmit)="onPostSave(postForm.value)">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Enter  name" formControlName="name">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Enter email" formControlName="email">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Enter body" formControlName="body">
+    </mat-form-field>
+    <br>
+    <div class="example-full-width button">
+      <button mat-raised-button color="primary" [disabled]="postForm.invalid">Save</button>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,14 @@
+.container {
+  text-align: justify;
+  padding: 1rem 1rem 1rem 16rem;
+}
+
+.mat-icon {
+  vertical-align: middle;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+}
