@@ -14,6 +14,7 @@ import { CoreModule } from "@app/core";
 import { SharedModule } from "@app/shared";
 import { HomeModule } from "./home/home.module";
 import { LoginModule } from "./login/login.module";
+import { SignupModule } from "@app/signup/signup.module";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 
@@ -31,6 +32,7 @@ import { AppRoutingModule } from "./app-routing.module";
     SharedModule,
     HomeModule,
     LoginModule,
+    SignupModule,
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
     AppRoutingModule
   ],
