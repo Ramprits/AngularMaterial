@@ -1,22 +1,23 @@
 <div class="example-container">
     <form [formGroup]="employeeForm" class="example-form" autocomplete="off" (ngSubmit)="onEmployeeSave(employeeForm.value)">
-         <mat-form-field class="example-full-width">
-              <input matInput placeholder="Enter first name" formControlName="firstName">
-         </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Enter first name" formControlName="firstName">
+        </mat-form-field>
 
-         <mat-form-field class="example-full-width">
-              <input matInput placeholder="Enter last name" formControlName="lastName">
-         </mat-form-field>
-       
-         <mat-form-field class="example-full-width">
-              <input matInput placeholder="Enter email" formControlName="email">
-         </mat-form-field>
-         <mat-form-field class="example-full-width">
-              <input matInput placeholder="Enter contact" formControlName="contact">
-         </mat-form-field>
-         <div class="example-full-width button">
-              <button mat-raised-button color="primary">Save</button>
-         </div>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Enter last name" formControlName="lastName">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Enter email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Enter contact" formControlName="contact">
+        </mat-form-field>
+        <div class="example-full-width button">
+            <button mat-raised-button color="primary" type="submit" [disabled]="employeeForm.invalid">Save</button>
+            <button mat-raised-button color="warn" type="button" (click)="resertForm()" >Reset</button>
+        </div>
 
     </form>
 </div>

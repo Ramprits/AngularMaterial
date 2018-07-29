@@ -1,3 +1,34 @@
 <div class="container">
-  <app-edit-employee></app-edit-employee>
+  <button mat-raised-button color="primary" *ngIf="!isEdit" (click)="AddPost()">Add</button>
+
+  <div *ngIf="isEdit;else editList">
+    <app-edit-employee (addEmployee)="saveEmployee($event)" (cancelEdit)="cancel($event)"></app-edit-employee>
+  </div>
+  <ng-template #editList>
+
+    <mat-card *ngFor="let employee of employees" style="margin-top: 1rem;">
+      <h1>
+        <mat-card-title> {{employee.firstName}} {{employee.lastName}}</mat-card-title>
+      </h1>
+      <mat-card-content>
+        <span>
+          {{employee.email}}
+          <br>
+
+          <p>
+            {{employee.contact}}
+          </p>
+          <br> {{employee.createdDate | date}}
+        </span>
+        <br>
+        <br>
+        <button mat-raised-button color="warn" (click)="onDelete(employee)">Delete</button>
+        <button mat-raised-button color="primary" (click)="onEdit(employee._id)">Edit</button>
+
+      </mat-card-content>
+    </mat-card>
+
+  </ng-template>
+
+
 </div>

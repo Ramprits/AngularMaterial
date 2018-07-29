@@ -9,10 +9,10 @@ import { Post } from "@app/post/post.model";
 export class PostService {
   private posts: Post[] = [];
   private postUpdated = new Subject<Post[]>();
-  constructor(private http: HttpClient) {}
+  constructor(private _httpClient: HttpClient) {}
 
   getPosts() {
-    this.http.get<{ message: string; posts: Post[] }>(`/api/posts`).subscribe(
+    this._httpClient.get<{ message: string; posts: Post[] }>(`/api/posts`).subscribe(
       postData => {
         this.posts = postData.posts;
         this.postUpdated.next([...this.posts]);
@@ -31,7 +31,7 @@ export class PostService {
     return this.postUpdated.asObservable();
   }
   addPost(postData: Post) {
-    this.http.post<{ message: string; postId: string }>("/api/posts", postData).subscribe(responseData => {
+    this._httpClient.post<{ message: string; postId: string }>("/api/posts", postData).subscribe(responseData => {
       const postId = responseData.postId;
       postData._id = postId;
       this.posts.push(postData);
@@ -39,12 +39,13 @@ export class PostService {
     });
   }
 
-  deletePost(post: Post) {
-    this.http.delete("/api/posts/" + post._id).subscribe(
-      () => {
-        const updatedPosts = this.posts.filter(postdata => postdata._id !== post._id);
+  deletePost(id: string) {
+    this._httpClient.delete<{ message: string }>("/api/posts/" + id).subscribe(
+      res => {
+        const updatedPosts = this.posts.filter(post => post._id !== id);
         this.posts = updatedPosts;
         this.postUpdated.next([...this.posts]);
+        console.log(res.message);
       },
       err => {
         console.error(err);

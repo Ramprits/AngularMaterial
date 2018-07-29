@@ -29,7 +29,7 @@ export class PostComponent implements OnInit, OnDestroy {
     this._ps.addPost(postData);
     this.isEdit = false;
   }
-  onDelete(postId: Post) {
+  onDelete(postId: string) {
     this._ps.deletePost(postId);
   }
 

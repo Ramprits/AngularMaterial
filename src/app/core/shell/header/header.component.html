@@ -7,18 +7,23 @@
   </div>
   <div fxHide.lt-md>
     <a class="brand" href="https://github.com/ngx-rocket" translate>APP_NAME</a>
-    <button mat-button routerLink="/home" routerLinkActive="active">
+    <button mat-button routerLink="/home" routerLinkActive="mat-accent">
       <mat-icon>home</mat-icon>
       <span translate>Home</span>
     </button>
-    <button mat-button routerLink="/about" routerLinkActive="active">
+    <button mat-button routerLink="/about" routerLinkActive="mat-accent">
       <mat-icon>info</mat-icon>
       <span translate>About</span>
     </button>
 
-    <button mat-button routerLink="/post" routerLinkActive="active">
+    <button mat-button routerLink="/post" routerLinkActive="mat-accent">
       <mat-icon>face</mat-icon>
       <span translate>Post</span>
+    </button>
+
+    <button mat-button routerLink="/employee" routerLinkActive="mat-accent">
+      <mat-icon>face</mat-icon>
+      <span translate>Employee</span>
     </button>
 
 
@@ -29,8 +34,8 @@
   </button>
   <mat-menu #languageMenu="matMenu">
     <button mat-menu-item *ngFor="let language of languages" (click)="setLanguage(language)">
-        {{language}}
-      </button>
+      {{language}}
+    </button>
   </mat-menu>
   <button mat-icon-button [matMenuTriggerFor]="userMenu">
     <mat-icon>person</mat-icon>
@@ -38,7 +43,8 @@
   <mat-menu #userMenu="matMenu">
     <mat-list>
       <mat-list-item>
-        <span translate>Logged in as</span>&nbsp;<b>{{username}}</b>
+        <span translate>Logged in as</span>&nbsp;
+        <b>{{username}}</b>
       </mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>
