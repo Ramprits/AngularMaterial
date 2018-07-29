@@ -45,6 +45,15 @@ export class AuthenticationService {
     return of(data);
   }
 
+  signup(context: LoginContext): Observable<Credentials> {
+    // Replace by proper authentication call
+    const data = {
+      username: context.username,
+      token: "123456"
+    };
+    this.setCredentials(data, context.remember);
+    return of(data);
+  }
   /**
    * Logs out the user and clear credentials.
    * @return {Observable<boolean>} True if the user was logged out successfully.

@@ -6,17 +6,17 @@ import { finalize } from "rxjs/operators";
 import { environment } from "@env/environment";
 import { Logger, I18nService, AuthenticationService } from "@app/core";
 
-const log = new Logger("Login");
+const log = new Logger("signup");
 
 @Component({
-  selector: "app-login",
+  selector: "app-signup",
   templateUrl: "./signup.component.html",
   styleUrls: ["./signup.component.scss"]
 })
 export class SignupComponent implements OnInit {
   version: string = environment.version;
   error: string;
-  loginForm: FormGroup;
+  signupForm: FormGroup;
   isLoading = false;
 
   constructor(
@@ -30,13 +30,13 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {}
 
-  login() {
+  signup() {
     this.isLoading = true;
     this.authenticationService
-      .login(this.loginForm.value)
+      .signup(this.signupForm.value)
       .pipe(
         finalize(() => {
-          this.loginForm.markAsPristine();
+          this.signupForm.markAsPristine();
           this.isLoading = false;
         })
       )
@@ -46,7 +46,7 @@ export class SignupComponent implements OnInit {
           this.router.navigate(["/"], { replaceUrl: true });
         },
         error => {
-          log.debug(`Login error: ${error}`);
+          log.debug(`signup error: ${error}`);
           this.error = error;
         }
       );
@@ -65,7 +65,7 @@ export class SignupComponent implements OnInit {
   }
 
   private createForm() {
-    this.loginForm = this.formBuilder.group({
+    this.signupForm = this.formBuilder.group({
       username: ["", Validators.required],
       password: ["", Validators.required],
       remember: true
