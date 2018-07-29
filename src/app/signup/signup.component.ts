@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { finalize } from "rxjs/operators";
 
 import { environment } from "@env/environment";
-import { Logger, I18nService, AuthenticationService } from "@app/core";
+import { Logger, I18nService, AuthenticationService, UserModel } from "@app/core";
 
 const log = new Logger("signup");
 
@@ -30,26 +30,9 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {}
 
-  signup() {
-    this.isLoading = true;
-    this.authenticationService
-      .signup(this.signupForm.value)
-      .pipe(
-        finalize(() => {
-          this.signupForm.markAsPristine();
-          this.isLoading = false;
-        })
-      )
-      .subscribe(
-        credentials => {
-          log.debug(`${credentials.username} successfully logged in`);
-          this.router.navigate(["/"], { replaceUrl: true });
-        },
-        error => {
-          log.debug(`signup error: ${error}`);
-          this.error = error;
-        }
-      );
+  signup(signupData: UserModel) {
+    this.authenticationService.signup(signupData.email, signupData.password);
+    console.log(signupData.email, signupData.password);
   }
 
   setLanguage(language: string) {
@@ -66,9 +49,8 @@ export class SignupComponent implements OnInit {
 
   private createForm() {
     this.signupForm = this.formBuilder.group({
-      username: ["", Validators.required],
-      password: ["", Validators.required],
-      remember: true
+      email: ["", Validators.required],
+      password: ["", Validators.required]
     });
   }
 }

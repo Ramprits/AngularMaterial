@@ -17,33 +17,35 @@
   </div>
   <div class="signup-container" fxLayout="row" fxLayoutAlign="center">
     <mat-card fxFlex="90%" fxFlex.sm="66%" fxFlex.md="50%" fxFlex.gt-md="33%" class="signup-box">
-      <form (ngSubmit)="signup()" [formGroup]="signupForm" novalidate>
+      <form [formGroup]="signupForm" (ngSubmit)="signup(signupForm.value)" novalidate>
         <div class="signup-error" [hidden]="!error || isLoading" translate>
           Username or password incorrect.
         </div>
         <br/>
         <div fxLayout="column">
           <mat-form-field>
-            <input type="text" matInput formControlName="username" autocomplete="username" [placeholder]="'Username' | translate" />
+            <input type="text" matInput formControlName="email" />
             <mat-error>
               <span translate>Username is required</span>
             </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input type="password" matInput formControlName="password" autocomplete="current-password" [placeholder]="'Password' | translate"
-              required/>
+            <input type="password" matInput formControlName="password" required/>
             <mat-error>
               <span translate>Password is required</span>
             </mat-error>
           </mat-form-field>
           <div style="margin-bottom:5px;">
-            <mat-slide-toggle color="primary" formControlName="remember" translate>Remember me</mat-slide-toggle>
+            <mat-slide-toggle color="primary" translate>Remember me</mat-slide-toggle>
           </div>
-          <button mat-raised-button color="primary" type="submit" [disabled]="signupForm.invalid || isLoading">
+          <button mat-raised-button color="primary" type="submit" [disabled]="signupForm.invalid">
             <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
             <span translate>Signup</span>
           </button>
         </div>
+        <pre>
+          {{signupForm.value|json}}
+        </pre>
       </form>
     </mat-card>
   </div>
