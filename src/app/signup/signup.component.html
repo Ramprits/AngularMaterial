@@ -38,14 +38,12 @@
           <div style="margin-bottom:5px;">
             <mat-slide-toggle color="primary" translate>Remember me</mat-slide-toggle>
           </div>
-          <button mat-raised-button color="primary" type="submit" [disabled]="signupForm.invalid">
+          <button mat-raised-button color="primary" type="submit" [disabled]="signupForm.invalid || isLoading">
             <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
             <span translate>Signup</span>
           </button>
         </div>
-        <pre>
-          {{signupForm.value|json}}
-        </pre>
+
       </form>
     </mat-card>
   </div>

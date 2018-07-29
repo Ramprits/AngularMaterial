@@ -31,8 +31,12 @@ export class SignupComponent implements OnInit {
   ngOnInit() {}
 
   signup(signupData: UserModel) {
+    if (this.signupForm.invalid) {
+      return;
+    }
+    this.isLoading = true;
     this.authenticationService.signup(signupData.email, signupData.password);
-    console.log(signupData.email, signupData.password);
+    this.isLoading = false;
   }
 
   setLanguage(language: string) {
