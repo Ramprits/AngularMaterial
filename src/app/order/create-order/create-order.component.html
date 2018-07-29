@@ -1,0 +1,24 @@
+<div class="container">
+  <form #orderForm="ngForm" class="example-form" autocomplete="off" (ngSubmit)="onSave()">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Enter  name" name="name" ngModel required #name="ngModel">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Enter price" name="price" ngModel required #price="ngModel">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="image" name="image" ngModel #image="ngModel">
+    </mat-form-field>
+
+
+    <div class="example-full-width button">
+      <button mat-raised-button color="primary" type="submit" [disabled]="orderForm.invalid">Save</button>
+      <button mat-raised-button color="warn" type="button">Reset</button>
+    </div>
+    <pre>
+  {{orderForm.form.value|json}}
+</pre>
+  </form>
+</div>

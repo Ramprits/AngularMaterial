@@ -6,7 +6,8 @@ const routes: Routes = [
   Route.withShell([
     { path: "about", loadChildren: "app/about/about.module#AboutModule" },
     { path: "post", loadChildren: "app/post/post.module#PostModule" },
-    { path: "employee", loadChildren: "app/employee/employee.module#EmployeeModule" }
+    { path: "employee", loadChildren: "app/employee/employee.module#EmployeeModule" },
+    { path: "order", loadChildren: "app/order/order.module#OrderModule" }
   ]),
   // Fallback when no prior route is matched
   { path: "**", redirectTo: "", pathMatch: "full" }

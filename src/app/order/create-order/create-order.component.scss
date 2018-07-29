@@ -1,0 +1,40 @@
+.example-full-width {
+    width: 50%;
+  }
+  .example-full-width .button {
+    float: left;
+  }
+  @media screen and (max-width: 600px) {
+    .example-full-width {
+      width: 100%;
+    }
+    .example-full-width .button {
+      float: left;
+    }
+  }
+  .example-radio-group {
+    display: inline-flex;
+    flex-direction: column;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+  
+  .example-selected-value {
+    margin: 15px 0;
+  }
+
+  .container {
+    text-align: justify;
+    padding: 1rem 1rem 1rem 16rem;
+  }
+  @media only screen and (max-width: 600px) {
+    .container {
+      padding: 1rem;
+    }
+  }
+
+  
+
+  
