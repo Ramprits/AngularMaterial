@@ -16,12 +16,12 @@
       <span translate>Order</span>
     </button>
 
-    <button *ngIf="userIsAuthenticated" mat-button routerLink="/post" routerLinkActive="mat-accent">
+    <button *ngIf="!userIsAuthenticated" mat-button routerLink="/post" routerLinkActive="mat-accent">
       <mat-icon>face</mat-icon>
       <span translate>Post</span>
     </button>
 
-    <button *ngIf="userIsAuthenticated" mat-button routerLink="/employee" routerLinkActive="mat-accent">
+    <button *ngIf="!userIsAuthenticated" mat-button routerLink="/employee" routerLinkActive="mat-accent">
       <mat-icon>face</mat-icon>
       <span translate>Employee</span>
     </button>
