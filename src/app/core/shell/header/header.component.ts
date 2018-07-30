@@ -1,34 +1,41 @@
-import { Title } from '@angular/platform-browser';
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { MatSidenav } from '@angular/material';
+import { Title } from "@angular/platform-browser";
+import { Component, OnInit, Input, OnDestroy } from "@angular/core";
+import { Router } from "@angular/router";
+import { MatSidenav } from "@angular/material";
 
-import { AuthenticationService } from '../../authentication/authentication.service';
-import { I18nService } from '../../i18n.service';
+import { AuthenticationService } from "../../authentication/authentication.service";
+import { I18nService } from "../../i18n.service";
+import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  selector: "app-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.scss"]
 })
-export class HeaderComponent implements OnInit {
-
+export class HeaderComponent implements OnInit, OnDestroy {
   @Input() sidenav: MatSidenav;
+  userIsAuthenticated = false;
+  private authListenerSubs: Subscription;
 
-  constructor(private router: Router,
-              private titleService: Title,
-              private authenticationService: AuthenticationService,
-              private i18nService: I18nService) { }
+  constructor(
+    private router: Router,
+    private titleService: Title,
+    private authenticationService: AuthenticationService,
+    private i18nService: I18nService
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.authListenerSubs = this.authenticationService.getAuthStatusListner().subscribe(isAuthenticated => {
+      this.userIsAuthenticated = isAuthenticated;
+    });
+  }
 
   setLanguage(language: string) {
     this.i18nService.language = language;
   }
 
   logout() {
-    this.authenticationService.logout()
-      .subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
+    this.authenticationService.logout();
   }
 
   get currentLanguage(): string {
@@ -39,13 +46,15 @@ export class HeaderComponent implements OnInit {
     return this.i18nService.supportedLanguages;
   }
 
-  get username(): string {
-    const credentials = this.authenticationService.credentials;
-    return credentials ? credentials.username : null;
-  }
+  // get username(): string {
+  //   const credentials = this.authenticationService.credentials;
+  //   return credentials ? credentials.username : null;
+  // }
 
   get title(): string {
     return this.titleService.getTitle();
   }
-
+  ngOnDestroy(): void {
+    this.authListenerSubs.unsubscribe();
+  }
 }

@@ -11,17 +11,17 @@
       <mat-icon>home</mat-icon>
       <span translate>Home</span>
     </button>
-    <button mat-button routerLink="/order" routerLinkActive="mat-accent">
+    <button *ngIf="userIsAuthenticated" mat-button routerLink="/order" routerLinkActive="mat-accent">
       <mat-icon>info</mat-icon>
       <span translate>Order</span>
     </button>
 
-    <button mat-button routerLink="/post" routerLinkActive="mat-accent">
+    <button *ngIf="userIsAuthenticated" mat-button routerLink="/post" routerLinkActive="mat-accent">
       <mat-icon>face</mat-icon>
       <span translate>Post</span>
     </button>
 
-    <button mat-button routerLink="/employee" routerLinkActive="mat-accent">
+    <button *ngIf="userIsAuthenticated" mat-button routerLink="/employee" routerLinkActive="mat-accent">
       <mat-icon>face</mat-icon>
       <span translate>Employee</span>
     </button>
@@ -44,11 +44,12 @@
     <mat-list>
       <mat-list-item>
         <span translate>Logged in as</span>&nbsp;
-        <b>{{username}}</b>
+        <!-- <b>{{username}}</b> -->
       </mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>
-    <button mat-menu-item (click)="logout()" translate>Logout</button>
-    <button mat-menu-item [routerLink]="['/signup']" translate>Register</button>
+    <button mat-menu-item *ngIf="userIsAuthenticated" (click)="logout()" translate>Logout</button>
+    <button mat-menu-item *ngIf="!userIsAuthenticated" routerLink="/login" translate>Login</button>
+    <button *ngIf="!userIsAuthenticated" mat-menu-item [routerLink]="['/signup']" translate>Register</button>
   </mat-menu>
 </mat-toolbar>
